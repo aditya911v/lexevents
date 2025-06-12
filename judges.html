@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distinguished Judges - LexEvents</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            light: '#1a365d',
+                            DEFAULT: '#0f2744',
+                            dark: '#0a1c2e',
+                        },
+                        gold: {
+                            light: '#f9d384',
+                            DEFAULT: '#d4af37',
+                            dark: '#b8860b',
+                        },
+                        accent: {
+                            red: '#9b2c2c',
+                            redLight: '#c53030',
+                        }
+                    },
+                    fontFamily: {
+                        'playfair': ['"Playfair Display"', 'serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="output.css" rel="stylesheet">
+    <style>
+        .judge-card {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .judge-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .quote-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            font-size: 120px;
+            font-family: 'Playfair Display', serif;
+            color: rgba(212, 175, 55, 0.1);
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="bg-navy-DEFAULT text-white font-inter">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-navy-dark bg-opacity-90 backdrop-blur-sm shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <span class="text-gold-DEFAULT text-2xl font-playfair font-bold">LexEvents</span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-white hover:text-gold-light transition-colors">Home</a>
+                    <a href="events.html" class="text-white hover:text-gold-light transition-colors">Events</a>
+                    <a href="judges.html" class="text-white hover:text-gold-light transition-colors">Judges</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-white focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="md:hidden hidden pt-4 pb-2">
+                <a href="index.html" class="block py-2 text-white hover:text-gold-light transition-colors">Home</a>
+                <a href="events.html" class="block py-2 text-white hover:text-gold-light transition-colors">Events</a>
+                <a href="judges.html" class="block py-2 text-white hover:text-gold-light transition-colors">Judges</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 bg-navy-dark overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-navy-dark via-navy-DEFAULT to-transparent opacity-90"></div>
+            <div class="absolute inset-0 bg-[url('assets/images/courthouse.jpg')] bg-cover bg-center opacity-20"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <span class="inline-block text-gold-light text-sm font-semibold tracking-[0.2em] uppercase mb-4" data-aos="fade-down">
+                    MEET OUR ESTEEMED
+                </span>
+                <h1 class="text-5xl md:text-6xl font-playfair font-bold mb-6 gold-gradient" data-aos="fade-up">
+                    Distinguished Judiciary Panel
+                </h1>
+                <p class="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Eminent legal luminaries who bring decades of expertise and wisdom to our prestigious events
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Judges Grid Section -->
+    <section class="py-20 bg-gradient-to-br from-navy-DEFAULT to-navy-light">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Judge Card 1 -->
+                <div class="judge-card glass p-6 rounded-xl border-l-4 border-gold-DEFAULT" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-start gap-6">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Hon. Justice Rahman" 
+                             class="w-32 h-32 rounded-xl object-cover border-4 border-gold-light shadow-xl">
+                        <div>
+                            <h3 class="text-2xl font-playfair font-bold gold-gradient mb-2">Hon. Justice Rahman</h3>
+                            <p class="text-gold-light mb-2">Supreme Court Justice</p>
+                            <p class="text-sm text-gray-300 mb-4">Former Chief Justice of Delhi High Court</p>
+                            <div class="flex gap-2">
+                                <span class="px-3 py-1 bg-navy-light rounded-full text-xs text-gold-light">Constitutional Law</span>
+                                <span class="px-3 py-1 bg-navy-light rounded-full text-xs text-gold-light">Human Rights</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <div class="quote-card p-4 bg-navy-dark bg-opacity-50 rounded-lg">
+                            <p class="text-gray-300 italic relative z-10">
+                                "The pursuit of justice is as noble as the law itself."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Judge Card 2 -->
+                <div class="judge-card glass p-6 rounded-xl border-l-4 border-gold-DEFAULT" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-start gap-6">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Hon. Justice Priya Sharma" 
+                             class="w-32 h-32 rounded-xl object-cover border-4 border-gold-light shadow-xl">
+                        <div>
+                            <h3 class="text-2xl font-playfair font-bold gold-gradient mb-2">Hon. Justice Priya Sharma</h3>
+                            <p class="text-gold-light mb-2">Supreme Court Justice</p>
+                            <p class="text-sm text-gray-300 mb-4">Former Chief Justice of Delhi High Court</p>
+                            <div class="flex gap-2">
+                                <span class="px-3 py-1 bg-navy-light rounded-full text-xs text-gold-light">Criminal Law</span>
+                                <span class="px-3 py-1 bg-navy-light rounded-full text-xs text-gold-light">Civil Rights</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <div class="quote-card p-4 bg-navy-dark bg-opacity-50 rounded-lg">
+                            <p class="text-gray-300 italic relative z-10">
+                                "Justice is not a privilege, but a right for all."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Judge Card 3 -->
+                <div class="judge-card glass p-6 rounded-xl border-l-4 border-gold-DEFAULT" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-start gap-6">
+                        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Dr. Sanjay Menon" 
+                             class="w-32 h-32 rounded-xl object-cover border-4 border-gold-light shadow-xl">
+                        <div>
+                            <h3 class="text-2xl font-playfair font-bold gold-gradient mb-2">Dr. Sanjay Menon</h3>
+                            <p class="text-gold-light mb-2">Supreme Court Justice</p>
+                            <p class="text-sm text-gray-300 mb-4">Former Chief Justice of Delhi High Court</p>
+                            <div class="flex gap-2">
+                                <span class="px-3 py-1 bg-navy-light rounded-full text-xs text-gold-light">Corporate Law</span>
+                                <span class="px-3 py-1 bg-navy-light rounded-full text-xs text-gold-light">Intellectual Property</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <div class="quote-card p-4 bg-navy-dark bg-opacity-50 rounded-lg">
+                            <p class="text-gray-300 italic relative z-10">
+                                "Innovation is the key to progress in the legal field."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Judge Card 4 -->
+                <div class="judge-card glass p-6 rounded-xl border-l-4 border-gold-DEFAULT" data-aos="fade-up" data-aos-delay="400">
+                    <div class="flex items-start gap-6">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Hon. Justice Kavita Singh" 
+                             class="w-32 h-32 rounded-xl object-cover border-4 border-gold-light shadow-xl">
+                        <div>
+                            <h3 class="text-2xl font-playfair font-bold gold-gradient mb-2">Hon. Justice Kavita Singh</h3>
+                            <p class="text-gold-light mb-2">Supreme Court Justice</p>
+                            <p class="text-sm text-gray-300 mb-4">Former Chief Justice of Delhi High Court</p>
+                            <div class="flex gap-2">
+                                <span class="px-3 py-1 bg-navy-light rounded-full text-xs text-gold-light">Family Law</span>
+                                <span class="px-3 py-1 bg-navy-light rounded-full text-xs text-gold-light">Taxation</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <div class="quote-card p-4 bg-navy-dark bg-opacity-50 rounded-lg">
+                            <p class="text-gray-300 italic relative z-10">
+                                "Justice is the foundation of peace."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Judge Card 5 -->
+                <div class="judge-card glass p-6 rounded-xl border-l-4 border-gold-DEFAULT" data-aos="fade-up" data-aos-delay="500">
+                    <div class="flex items-start gap-6">
+                        <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Adv. Rohan Gupta" 
+                             class="w-32 h-32 rounded-xl object-cover border-4 border-gold-light shadow-xl">
+                        <div>
+                            <h3 class="text-2xl font-playfair font-bold gold-gradient mb-2">Adv. Rohan Gupta</h3>
+                            <p class="text-gold-light mb-2">Supreme Court Justice</p>
+                            <p class="text-sm text-gray-300 mb-4">Former Chief Justice of Delhi High Court</p>
+                            <div class="flex gap-2">
+                                <span class="px-3 py-1 bg-navy-light rounded-full text-xs text-gold-light">Environmental Law</span>
+                                <span class="px-3 py-1 bg-navy-light rounded-full text-xs text-gold-light">International Law</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <div class="quote-card p-4 bg-navy-dark bg-opacity-50 rounded-lg">
+                            <p class="text-gray-300 italic relative z-10">
+                                "Integrity is the cornerstone of trust."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Judicial Excellence Section -->
+    <section class="py-16 bg-navy-dark">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-playfair font-bold text-center gold-gradient mb-12" data-aos="fade-up">
+                    Commitment to Judicial Excellence
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass p-6 rounded-xl text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-16 h-16 bg-gold-DEFAULT bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-gold-light" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gold-light mb-2">50+ Years</h3>
+                        <p class="text-sm text-gray-300">Combined Judicial Experience</p>
+                    </div>
+                    <div class="glass p-6 rounded-xl text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-16 h-16 bg-gold-DEFAULT bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-gold-light" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gold-light mb-2">100+ Cases</h3>
+                        <p class="text-sm text-gray-300">Landmark Judgments Delivered</p>
+                    </div>
+                    <div class="glass p-6 rounded-xl text-center" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-16 h-16 bg-gold-DEFAULT bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-gold-light" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gold-light mb-2">10+ Awards</h3>
+                        <p class="text-sm text-gray-300">National and International Recognition</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Judicial Insights Section -->
+    <section class="py-20 bg-gradient-to-br from-navy-DEFAULT to-navy-light relative overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 left-0 w-72 h-72 bg-gold-DEFAULT opacity-5 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-gold-light opacity-5 rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2"></div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="inline-block text-gold-light text-sm font-semibold tracking-[0.2em] uppercase mb-4" data-aos="fade-down">
+                        EXCELLENCE IN JURISPRUDENCE
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-playfair font-bold gold-gradient mb-6" data-aos="fade-up">
+                        Judicial Insights & Perspectives
+                    </h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-gold-light to-gold-DEFAULT mx-auto"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Evaluation Criteria Card -->
+                    <div class="glass p-8 rounded-xl border-l-4 border-gold-DEFAULT hover:transform hover:scale-105 transition-all duration-300 shadow-xl" data-aos="fade-right">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 bg-gold-DEFAULT bg-opacity-20 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-gold-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-playfair font-bold text-gold-light">Evaluation Criteria</h3>
+                        </div>
+
+                        <ul class="space-y-6">
+                            <li class="transform hover:-translate-x-2 transition-transform duration-300">
+                                <div class="flex items-start gap-4 group">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-navy-dark rounded-lg flex items-center justify-center group-hover:bg-gold-DEFAULT transition-colors duration-300">
+                                        <svg class="w-5 h-5 text-gold-light group-hover:text-navy-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </span>
+                                    <div>
+                                        <h4 class="text-gold-light font-semibold mb-1">Legal Comprehension</h4>
+                                        <p class="text-gray-300 text-sm">Comprehensive understanding of constitutional and procedural law principles</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- Add similar styling for other list items -->
+                        </ul>
+                    </div>
+
+                    <!-- Judicial Philosophy Card -->
+                    <div class="glass p-8 rounded-xl border-r-4 border-gold-DEFAULT hover:transform hover:scale-105 transition-all duration-300 shadow-xl" data-aos="fade-left">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 bg-gold-DEFAULT bg-opacity-20 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-gold-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-playfair font-bold text-gold-light">Judicial Philosophy</h3>
+                        </div>
+
+                        <div class="mb-6 relative">
+                            <div class="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-gold-light to-transparent"></div>
+                            <p class="text-gray-300 leading-relaxed">
+                                Our distinguished judges adhere to a philosophy that emphasizes the rule of law, equality before the law, and the protection of fundamental rights. They believe in a proactive and progressive judiciary that adapts to the changing needs of society while upholding the core values of justice and fairness.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-playfair font-semibold text-gold-light flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                                    <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                Key Principles
+                            </h4>
+                            <ul class="grid grid-cols-2 gap-4">
+                                <li class="flex items-center gap-2 text-gray-300 hover:text-gold-light transition-colors">
+                                    <span class="w-2 h-2 bg-gold-DEFAULT rounded-full"></span>
+                                    Independence
+                                </li>
+                                <!-- Add similar styling for other principles -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-navy-dark py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-playfair font-bold text-gold-DEFAULT mb-2">LexEvents</h2>
+                    <p class="text-gray-400 max-w-md">Elevating legal education through prestigious competitions and events.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-gold-light transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gold-light transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gold-light transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gold-light transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2023 LexEvents. All rights reserved.</p>
+                    <div class="flex space-x-6 text-sm text-gray-400">
+                        <a href="#" class="hover:text-gold-light transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-gold-light transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </footer>               
+                    </div>
+                </div>
+     
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
