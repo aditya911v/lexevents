@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Registration - LexEvents</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="./css/form-animations.css" rel="stylesheet" />
+</head>
+<body class="bg-navy-DEFAULT text-white font-inter">
+  <section class="pt-32 pb-20 bg-gradient-to-br from-navy-DEFAULT to-navy-light relative overflow-hidden">
+    <div id="particles"></div>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12 floating-card">
+          <span class="inline-block text-gold-light text-sm font-semibold tracking-[0.2em] uppercase mb-4" data-aos="fade-down">JOIN THE EXCELLENCE</span>
+          <h1 class="text-4xl md:text-5xl font-playfair font-bold gold-gradient mb-4 relative" data-aos="fade-up">
+            Event Registration
+            <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-transparent via-gold-DEFAULT to-transparent"></div>
+          </h1>
+          <p class="text-gray-300" data-aos="fade-up" data-aos-delay="100">Begin your journey towards legal excellence</p>
+        </div>
+
+        <form id="registrationForm" class="form-container" data-aos="fade-up" novalidate>
+          <div class="form-progress" id="formProgress"></div>
+          <div class="flex justify-between mb-12">
+            <div class="step-indicator active"><div class="step-number flex items-center justify-center">1</div><span class="text-xs text-gold-light mt-2">Team Info</span></div>
+            <div class="step-indicator"><div class="step-number flex items-center justify-center">2</div><span class="text-xs text-gold-light mt-2">Participants</span></div>
+            <div class="step-indicator"><div class="step-number flex items-center justify-center">3</div><span class="text-xs text-gold-light mt-2">Payment</span></div>
+          </div>
+
+          <!-- TEAM INFO -->
+          <div class="form-field">
+            <input type="text" id="teamName" name="teamName" required placeholder=" ">
+            <label for="teamName">Team Name</label>
+            <div class="error-message">Please enter team name</div>
+          </div>
+
+          <div class="form-field">
+            <input type="text" id="institution" name="institution" required placeholder=" ">
+            <label for="institution">Institution Name</label>
+          </div>
+
+          <!-- TEAM LEADER -->
+          <div class="space-y-6 bg-navy-dark/50 p-6 rounded-lg border border-gold-DEFAULT/30">
+            <h3 class="text-xl font-playfair font-bold text-gold-light">Team Leader</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="form-field">
+                <input type="text" id="leaderName" name="leaderName" required placeholder=" ">
+                <label for="leaderName">Full Name</label>
+              </div>
+              <div class="form-field">
+                <input type="email" id="leaderEmail" name="leaderEmail" required placeholder=" ">
+                <label for="leaderEmail">Email Address</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- DYNAMIC PARTICIPANTS -->
+          <div id="participantContainer"></div>
+
+          <!-- Add Participant -->
+          <button type="button" id="addParticipant" class="w-full py-3 border-2 border-dashed border-gold-DEFAULT/50 rounded-lg text-gold-light hover:bg-navy-dark/50 transition-colors mt-6">
+            <span class="flex items-center justify-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+              Add Team Member
+            </span>
+          </button>
+
+          <button type="submit" class="submit-button w-full mt-6">Continue to Payment</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <template id="participantTemplate">
+    <div class="participant-block mb-6 p-6 bg-navy-dark rounded-lg border border-gold-DEFAULT/30">
+      <h3 class="text-lg font-semibold text-gold-light mb-4">Participant <span class="participant-number"></span></h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="form-field">
+          <input type="text" name="participantName" required placeholder=" ">
+          <label>Full Name</label>
+        </div>
+        <div class="form-field">
+          <input type="email" name="participantEmail" required placeholder=" ">
+          <label>Email</label>
+        </div>
+        <div class="form-field">
+          <input type="tel" name="participantPhone" required placeholder=" ">
+          <label>Contact Number</label>
+        </div>
+        <div class="form-field">
+          <select name="participantYear" required>
+            <option value="" disabled selected hidden>Choose Year</option>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+            <option>5th Year</option>
+          </select>
+          <label>Year of Study</label>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    const maxParticipants = 4;
+    let participantCount = 0;
+
+    const form = document.getElementById('registrationForm');
+    const formProgress = document.getElementById('formProgress');
+    const addBtn = document.getElementById('addParticipant');
+    const participantContainer = document.getElementById('participantContainer');
+    const participantTemplate = document.getElementById('participantTemplate');
+
+    const updateProgress = () => {
+      const inputs = form.querySelectorAll('input[required], select[required]');
+      const filled = [...inputs].filter(i => i.value.trim()).length;
+      const progress = (filled / inputs.length) * 100;
+      formProgress.style.width = `${progress}%`;
+    };
+
+    const validateField = (field) => {
+      const isValid = field.checkValidity();
+      field.parentElement.classList.toggle('error', !isValid);
+      return isValid;
+    };
+
+    const createParticipant = () => {
+      participantCount++;
+      const clone = participantTemplate.content.cloneNode(true);
+      clone.querySelector('.participant-number').textContent = participantCount;
+      participantContainer.appendChild(clone);
+      if (participantCount >= maxParticipants) addBtn.disabled = true;
+      updateProgress();
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      form.addEventListener('input', updateProgress);
+      form.addEventListener('blur', (e) => validateField(e.target), true);
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const allFields = form.querySelectorAll('input[required], select[required]');
+        let isValid = true;
+        allFields.forEach(field => {
+          if (!validateField(field)) isValid = false;
+        });
+        if (isValid) {
+          console.log('Form is valid. Proceeding...');
+        }
+      });
+
+      addBtn.addEventListener('click', createParticipant);
+      createParticles();
+    });
+
+    function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 20; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.width = p.style.height = `${Math.random() * 3 + 1}px`;
+        p.style.background = `rgba(212,175,55,${Math.random() * 0.5})`;
+        p.style.left = `${Math.random() * 100}vw`;
+        p.style.top = `${Math.random() * 100}vh`;
+        p.style.setProperty('--x', `${Math.random() * 100 - 50}px`);
+        p.style.setProperty('--y', `${Math.random() * 100 - 50}px`);
+        p.style.animation = `particle-float ${Math.random() * 3 + 2}s ease-in-out infinite`;
+        container.appendChild(p);
+      }
+    }
+  </script>
+</body>
+</html>
